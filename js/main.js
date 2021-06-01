@@ -20,6 +20,15 @@ function criarCobrinha() {
     }
 }
 
+document.addEventListener('keydown', update); //keydown, evento de clique
+
+function update(event) {
+    if (event.keyCode == 37 && direcao != "right") direcao = "left";
+    if (event.keyCode == 38 && direcao != "down") direcao = "up";
+    if (event.keyCode == 39 && direcao != "left") direcao = "right";
+    if (event.keyCode == 40 && direcao != "up") direcao = "down";
+}
+
 function iniciarJogo() {
     criarBG();
     criarCobrinha();
@@ -27,11 +36,11 @@ function iniciarJogo() {
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
 
-    if (direcao == "right") snakeX = box + snakeX;
-    if (direcao == "left") snakeX = box - snakeX;
+    if (direcao == "right") snakeX += box;
+    if (direcao == "left") snakeX -= box;
 
-    if (direcao == "up") snakeY = box - snakeY;
-    if (direcao == "down") snakeY = box + snakeY;
+    if (direcao == "up") snakeY -= box;
+    if (direcao == "down") snakeY += box;
 
     snake.pop(); //retira o último elemento do array
 
