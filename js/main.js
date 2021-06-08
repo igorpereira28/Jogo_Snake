@@ -1,6 +1,8 @@
 let canvas = document.getElementById("snake");
 let context = canvas.getContext("2d");
 let box = 32;
+let engolindo=document.getElementById("engolindo");
+let game_over=document.getElementById("game_over");
 let snake = [];
 snake[0] = {
     x: 8 * box,
@@ -33,9 +35,13 @@ document.addEventListener('keydown', update); //keydown, evento de clique
 
 function update(event) {
     if (event.keyCode == 37 && direcao != "right") direcao = "left";
+    if (event.keyCode == 65 && direcao != "right") direcao = "left";
     if (event.keyCode == 38 && direcao != "down") direcao = "up";
+    if (event.keyCode == 87 && direcao != "down") direcao = "up";
     if (event.keyCode == 39 && direcao != "left") direcao = "right";
+    if (event.keyCode == 68 && direcao != "left") direcao = "right";
     if (event.keyCode == 40 && direcao != "up") direcao = "down";
+    if (event.keyCode == 83 && direcao != "up") direcao = "down";
 }
 
 function iniciarJogo() {
@@ -48,6 +54,7 @@ function iniciarJogo() {
 
     for (i = 1; i < snake.length; i++) {
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
+            game_over.play();
             clearInterval(jogo);
             alert('Game Over ):');
         }
@@ -70,7 +77,8 @@ function iniciarJogo() {
         snake.pop(); //retira o último elemento do array
     } else {
         comida.x = Math.floor(Math.random() * 15+1) * box,
-        comida.y = Math.floor(Math.random() * 15+1) * box
+        comida.y = Math.floor(Math.random() * 15+1) * box;
+        engolindo.play();
     }
 
 
